@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  color: #2A211C;
+  background: #F8F4EE;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #F8F4EE;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: #D8A7A0;
+  color: #2A211C;
+}
+
+@layer components {
+  .container-luxury {
+    width: min(1200px, calc(100% - 40px));
+    margin-inline: auto;
+  }
+
+  .section-padding {
+    padding-block: 100px;
+  }
+
+  .luxury-button {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition-all duration-300;
+  }
+
+  .luxury-button-primary {
+    @apply luxury-button bg-espresso text-white hover:bg-cocoa hover:-translate-y-0.5;
+  }
+
+  .luxury-button-outline {
+    @apply luxury-button border border-espresso/20 text-espresso hover:bg-espresso hover:text-white;
+  }
+}
+
+/* =========================================
+   SCROLL REVEAL ANIMATIONS
+========================================= */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(70px) scale(0.96);
+  filter: blur(8px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.8s ease;
+}
+
+.scroll-reveal-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* Cake image reveal */
+
+.collections-image-container {
+  overflow: hidden;
+}
+
+.collections-image-container img {
+  transform: scale(1.08);
+  transition:
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.8s ease;
+}
+
+.scroll-reveal-visible .collections-image-container img {
+  transform: scale(1);
+}
+
+.collections-image-container:hover img {
+  transform: scale(1.08);
+}
+
+/* Card hover */
+
+.collections-card {
+  transition:
+    transform 0.5s ease,
+    box-shadow 0.5s ease,
+    border-color 0.5s ease;
+}
+
+.collections-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 60px rgba(42, 33, 28, 0.14);
+}
+
+/* Signature badge bounce */
+
+.collections-signature {
+  animation: signature-bounce 2.4s ease-in-out infinite;
+}
+
+@keyframes signature-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Gallery overlay */
+
+.collections-gallery-label {
+  opacity: 0;
+  transform: translateY(15px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+.collections-image-container:hover .collections-gallery-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Category button */
+
+.collections-filter-button {
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.collections-filter-button:hover {
+  transform: translateY(-3px);
+}
+
+/* Hero animation */
+
+.collections-hero-item {
+  animation: hero-reveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes hero-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Results header */
+
+.collections-results-header {
+  animation: results-reveal 0.8s ease both;
+}
+
+@keyframes results-reveal {
+  from {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Empty state */
+
+.collections-bounce {
+  animation: empty-bounce 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes empty-bounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  60% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal,
+  .collections-hero-item,
+  .collections-results-header,
+  .collections-bounce {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+
+  .collections-image-container img,
+  .collections-card {
+    transition: none !important;
+  }
+}
